@@ -235,10 +235,23 @@ button:hover {
   color: var(--muted);
 }
 
-h1 img {
-  display: block;
-  width: 100%;
-  max-width: 320px;
+h1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+h1 .logo {
+  flex: 1;
+  min-width: 0;
+  max-width: 240px;
   height: auto;
-  margin: 0 auto;
+}
+
+h1 .mascot {
+  flex: none;
+  width: 90px;
+  height: auto;
+  border-radius: 12px;
 }
