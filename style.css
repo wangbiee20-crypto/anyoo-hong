@@ -192,3 +192,45 @@ button:hover {
   font-weight: bold;
   background: #7e57c2;
 }
+
+#deleted-section {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #f1e6c4;
+}
+
+#deleted-section h2 {
+  margin: 0 0 12px;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+#deleted-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#deleted-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+#deleted-list li span {
+  text-decoration: line-through;
+  word-break: break-all;
+}
+
+#deleted-list li time {
+  flex-shrink: 0;
+}
+
+#deleted-empty {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}

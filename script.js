@@ -6,6 +6,29 @@ const remainingCount = document.getElementById('remaining-count');
 
 let todos = JSON.parse(localStorage.getItem('todos') || '[]');
 
+let deletedLog = JSON.parse(localStorage.getItem('deletedLog') || '[]');
+const deletedList = document.getElementById('deleted-list');
+const deletedEmpty = document.getElementById('deleted-empty');
+
+function renderDeleted() {
+  deletedList.innerHTML = '';
+  deletedLog.slice().reverse().forEach(function (item) {
+    const li = document.createElement('li');
+    const text = document.createElement('span');
+    text.textContent = item.text;
+    const time = document.createElement('time');
+    time.textContent = new Date(item.at).toLocaleString('ko-KR', {
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit'
+    });
+    li.append(text, time);
+    deletedList.append(li);
+  });
+  deletedEmpty.hidden = deletedLog.length > 0;
+}
+
 function save() {
   localStorage.setItem('todos', JSON.stringify(todos));
 }
@@ -47,6 +70,9 @@ function render() {
     remove.type = 'button';
     remove.textContent = '삭제';
     remove.addEventListener('click', function () {
+      deletedLog.push({ text: todos[index].text, at: Date.now() });
+      localStorage.setItem('deletedLog', JSON.stringify(deletedLog));
+      renderDeleted();
       todos.splice(index, 1);
       save();
       render();
@@ -71,6 +97,7 @@ form.addEventListener('submit', function (event) {
 });
 
 render();
+renderDeleted();
 
 const todayDate = new Date();
 let viewYear = todayDate.getFullYear();
