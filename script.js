@@ -2,6 +2,7 @@ const form = document.getElementById('todo-form');
 const input = document.getElementById('todo-input');
 const list = document.getElementById('todo-list');
 const emptyMessage = document.getElementById('empty-message');
+const remainingCount = document.getElementById('remaining-count');
 
 let todos = JSON.parse(localStorage.getItem('todos') || '[]');
 
@@ -40,6 +41,8 @@ function render() {
     list.append(li);
   });
   emptyMessage.hidden = todos.length > 0;
+  const remaining = todos.filter(function (todo) { return !todo.done; }).length;
+  remainingCount.textContent = '남은 할 일: ' + remaining + '개';
 }
 
 form.addEventListener('submit', function (event) {
