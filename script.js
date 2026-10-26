@@ -72,12 +72,13 @@ form.addEventListener('submit', function (event) {
 
 render();
 
+const todayDate = new Date();
+let viewYear = todayDate.getFullYear();
+let viewMonth = todayDate.getMonth();
+
 function renderCalendar() {
-  const today = new Date();
-  const year = today.getFullYear();
-  const month = today.getMonth();
   const grid = document.getElementById('calendar-grid');
-  document.getElementById('calendar-title').textContent = year + '년 ' + (month + 1) + '월';
+  document.getElementById('calendar-title').textContent = viewYear + '년 ' + (viewMonth + 1) + '월';
   grid.innerHTML = '';
 
   ['일', '월', '화', '수', '목', '금', '토'].forEach(function (name) {
@@ -87,17 +88,36 @@ function renderCalendar() {
     grid.append(head);
   });
 
-  const firstDay = new Date(year, month, 1).getDay();
-  const lastDate = new Date(year, month + 1, 0).getDate();
+  const firstDay = new Date(viewYear, viewMonth, 1).getDay();
+  const lastDate = new Date(viewYear, viewMonth + 1, 0).getDate();
+  const isThisMonth = viewYear === todayDate.getFullYear() && viewMonth === todayDate.getMonth();
   for (let i = 0; i < firstDay; i++) {
     grid.append(document.createElement('div'));
   }
   for (let date = 1; date <= lastDate; date++) {
     const cell = document.createElement('div');
-    cell.className = 'day' + (date === today.getDate() ? ' today' : '');
+    cell.className = 'day' + (isThisMonth && date === todayDate.getDate() ? ' today' : '');
     cell.textContent = date;
     grid.append(cell);
   }
 }
+
+document.getElementById('prev-month').addEventListener('click', function () {
+  viewMonth -= 1;
+  if (viewMonth < 0) {
+    viewMonth = 11;
+    viewYear -= 1;
+  }
+  renderCalendar();
+});
+
+document.getElementById('next-month').addEventListener('click', function () {
+  viewMonth += 1;
+  if (viewMonth > 11) {
+    viewMonth = 0;
+    viewYear += 1;
+  }
+  renderCalendar();
+});
 
 renderCalendar();

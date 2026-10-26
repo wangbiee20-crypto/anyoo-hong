@@ -9,6 +9,14 @@
 <body>
   <main>
     <h1>할 일 목록</h1>
+    <section id="calendar">
+      <div id="calendar-header">
+        <button type="button" id="prev-month">◀</button>
+        <h2 id="calendar-title"></h2>
+        <button type="button" id="next-month">▶</button>
+      </div>
+      <div id="calendar-grid"></div>
+    </section>
     <form id="todo-form">
       <input id="todo-input" type="text" placeholder="할 일을 적어 주세요" autocomplete="off">
       <button type="submit">추가</button>
@@ -16,10 +24,6 @@
     <p id="remaining-count"></p>
     <ul id="todo-list"></ul>
     <p id="empty-message">아직 할 일이 없어요.</p>
-    <section id="calendar">
-      <h2 id="calendar-title"></h2>
-      <div id="calendar-grid"></div>
-    </section>
   </main>
   <script src="script.js"></script>
 </body>
