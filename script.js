@@ -12,7 +12,12 @@ function save() {
 
 function render() {
   list.innerHTML = '';
-  todos.forEach(function (todo, index) {
+  const order = todos.map(function (todo, index) { return index; });
+  order.sort(function (a, b) {
+    return Number(!!todos[b].starred) - Number(!!todos[a].starred) || a - b;
+  });
+  order.forEach(function (index) {
+    const todo = todos[index];
     const li = document.createElement('li');
     if (todo.done) li.className = 'done';
 
@@ -21,6 +26,16 @@ function render() {
     check.checked = todo.done;
     check.addEventListener('change', function () {
       todos[index].done = check.checked;
+      save();
+      render();
+    });
+
+    const star = document.createElement('button');
+    star.type = 'button';
+    star.className = 'star' + (todo.starred ? ' on' : '');
+    star.textContent = '★';
+    star.addEventListener('click', function () {
+      todos[index].starred = !todos[index].starred;
       save();
       render();
     });
@@ -37,7 +52,7 @@ function render() {
       render();
     });
 
-    li.append(check, text, remove);
+    li.append(check, star, text, remove);
     list.append(li);
   });
   emptyMessage.hidden = todos.length > 0;

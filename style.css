@@ -106,6 +106,17 @@ button:hover {
   word-break: break-all;
 }
 
+#todo-list li button.star {
+  padding: 4px 6px;
+  font-size: 20px;
+  color: #ccc;
+  background: transparent;
+}
+
+#todo-list li button.star.on {
+  color: #f4b400;
+}
+
 #todo-list li button {
   padding: 6px 10px;
   font-size: 12px;
