@@ -71,3 +71,33 @@ form.addEventListener('submit', function (event) {
 });
 
 render();
+
+function renderCalendar() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth();
+  const grid = document.getElementById('calendar-grid');
+  document.getElementById('calendar-title').textContent = year + '년 ' + (month + 1) + '월';
+  grid.innerHTML = '';
+
+  ['일', '월', '화', '수', '목', '금', '토'].forEach(function (name) {
+    const head = document.createElement('div');
+    head.className = 'day-name';
+    head.textContent = name;
+    grid.append(head);
+  });
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const lastDate = new Date(year, month + 1, 0).getDate();
+  for (let i = 0; i < firstDay; i++) {
+    grid.append(document.createElement('div'));
+  }
+  for (let date = 1; date <= lastDate; date++) {
+    const cell = document.createElement('div');
+    cell.className = 'day' + (date === today.getDate() ? ' today' : '');
+    cell.textContent = date;
+    grid.append(cell);
+  }
+}
+
+renderCalendar();

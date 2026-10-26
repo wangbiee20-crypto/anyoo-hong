@@ -146,3 +146,43 @@ button:hover {
     border-radius: 0;
   }
 }
+
+#calendar {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #f1e6c4;
+}
+
+#calendar h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  text-align: center;
+}
+
+#calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  text-align: center;
+}
+
+#calendar-grid .day-name {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--muted);
+}
+
+#calendar-grid .day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  font-size: 14px;
+  border-radius: 50%;
+}
+
+#calendar-grid .day.today {
+  color: #fff;
+  font-weight: bold;
+  background: #7e57c2;
+}
